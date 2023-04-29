@@ -14,10 +14,11 @@ const int SCREEN_HEIGHT = 900;
 
 float walkingX = 0;
 float walkingY = 0;
-float walking_nose_X = 0;
 float nose_move = 0;
+float nose_enlarge = 0;
+float word_enlarge = 0;
 int dx = 10; //speed of x
-int dy = 0; //speed of y
+int dy = 10; //speed of y
 float scaleFactor = 2;
 
 
@@ -36,8 +37,7 @@ void init()
     glLoadIdentity();
 }
 
-
-void drawPinnochio(float x, float y, float width, float height, float speedX, float speedY, float scale, float nose_length)
+void drawPinnochio(float x, float y, float width, float height, float speedX, float speedY, float scale, float nose_length, float nose_width)
 {
 
     //hat
@@ -118,15 +118,6 @@ void drawPinnochio(float x, float y, float width, float height, float speedX, fl
     glVertex2i(scale * (x + 100) + speedX, scale * (y - 40) + speedY);
     glEnd();
 
-    //nose
-    glBegin(GL_POLYGON);
-    glColor3f(1.0f, 0.5f, 0.0f);
-    glVertex2i(scale * (x - 40 + nose_length) + speedX, scale * (y - 80) + speedY);
-    glVertex2i(scale * (x + 40 ) + speedX, scale * (y - 80) + speedY);
-    glVertex2i(scale * (x + 40 ) + speedX, scale * (y - 60) + speedY);
-    glVertex2i(scale * (x - 40 + nose_length) + speedX, scale * (y - 60) + speedY);
-    glEnd();
-
     //eyes
     glBegin(GL_POLYGON);
     glColor3f(0.3f, 0.3f, 0.3f);
@@ -177,8 +168,6 @@ void drawPinnochio(float x, float y, float width, float height, float speedX, fl
     glVertex2i(scale* (x + 20) + speedX, scale* (y - 50) + speedY);
     glVertex2i(scale* (x + 10) + speedX, scale* (y - 50) + speedY);
     glEnd();
-
-
 
     //body
     glBegin(GL_POLYGON);
@@ -239,7 +228,360 @@ void drawPinnochio(float x, float y, float width, float height, float speedX, fl
     glVertex2i(scale* x + speedX, scale* (y - 180) + speedY);
     glEnd();
 
+    //nose
+    glBegin(GL_POLYGON);
+    glColor3f(1.0f, 0.5f, 0.0f);
+    glVertex2i(scale* (x - 40 + nose_length) + speedX, scale* (y - 80 + nose_enlarge) + speedY);
+    glVertex2i(scale* (x + 40) + speedX, scale* (y - 80 + nose_enlarge) + speedY);
+    glVertex2i(scale* (x + 40) + speedX, scale* (y - 60 - nose_enlarge) + speedY);
+    glVertex2i(scale* (x - 40 + nose_length) + speedX, scale* (y - 60 - nose_enlarge) + speedY);
+    glEnd();
 
+}
+
+void fontPinnochio(float x, float y, float speedX, float speedY, float scale)
+{
+    //p
+    glBegin(GL_POLYGON);
+    glColor3f(0.0f, 0.0f, 0.9f);
+    glVertex2i(x ,y + 200 + speedY);
+    glVertex2i(x + 20, y + 200 + speedY);
+    glVertex2i(x + 20, y + speedY);
+    glVertex2i(x, y + speedY);
+    glEnd();
+
+    glBegin(GL_POLYGON);
+    glColor3f(0.0f, 0.0f, 0.9f);
+    glVertex2i(x - 20, y + 20 + speedY);
+    glVertex2i(x + 40, y + 20 + speedY);
+    glVertex2i(x + 40, y + speedY);
+    glVertex2i(x - 20, y + speedY);
+    glEnd();
+
+    glBegin(GL_POLYGON);
+    glColor3f(0.0f, 0.0f, 0.9f);
+    glVertex2i(x - 20, y + 200 + speedY);
+    glVertex2i(x + 70, y + 200 + speedY);
+    glVertex2i(x + 70, y + 180 + speedY);
+    glVertex2i(x - 20, y + 180 + speedY);
+    glEnd();
+
+    glBegin(GL_POLYGON);
+    glColor3f(0.0f, 0.0f, 0.9f);
+    glVertex2i(x + 60, y + 180 + speedY);
+    glVertex2i(x + 85, y + 180 + speedY);
+    glVertex2i(x + 85, y + 120 + speedY);
+    glVertex2i(x + 60, y + 120 + speedY);
+    glEnd();
+
+    glBegin(GL_POLYGON);
+    glColor3f(0.0f, 0.0f, 0.9f);
+    glVertex2i(x + 20, y + 120 + speedY);
+    glVertex2i(x + 70, y + 120 + speedY);
+    glVertex2i(x + 70, y + 100 + speedY);
+    glVertex2i(x + 20, y + 100 + speedY);
+    glEnd();
+
+    //i
+    glBegin(GL_POLYGON);
+    glColor3f(0.0f, 0.0f, 0.9f);
+    glVertex2i(x + 140, y + 120 + speedY);
+    glVertex2i(x + 160, y + 120 + speedY);
+    glVertex2i(x + 160, y + speedY);
+    glVertex2i(x + 140, y + speedY);
+    glEnd();
+
+    glBegin(GL_POLYGON);
+    glColor3f(0.0f, 0.0f, 0.9f);
+    glVertex2i(x + 120, y + 20 + speedY);
+    glVertex2i(x + 180, y + 20 + speedY);
+    glVertex2i(x + 180, y + speedY);
+    glVertex2i(x + 120, y + speedY);
+    glEnd();
+
+    glBegin(GL_POLYGON);
+    glColor3f(0.0f, 0.0f, 0.9f);
+    glVertex2i(x + 120, y + 120 + speedY);
+    glVertex2i(x + 160, y + 120 + speedY);
+    glVertex2i(x + 160, y + 100 + speedY);
+    glVertex2i(x + 120, y + 100 + speedY);
+    glEnd();
+
+    glBegin(GL_POLYGON);
+    glColor3f(0.0f, 0.0f, 0.9f);
+    glVertex2i(x + 140, y + 180 + speedY);
+    glVertex2i(x + 160, y + 180 + speedY);
+    glVertex2i(x + 160, y + 160 + speedY);
+    glVertex2i(x + 140, y + 160 + speedY);
+    glEnd();
+
+    //n
+    glBegin(GL_POLYGON);
+    glColor3f(0.0f, 0.0f, 0.9f);
+    glVertex2i(x + 220, y + 120 + speedY);
+    glVertex2i(x + 240, y + 120 + speedY);
+    glVertex2i(x + 240, y + speedY);
+    glVertex2i(x + 220, y + speedY);
+    glEnd();
+
+    glBegin(GL_POLYGON);
+    glColor3f(0.0f, 0.0f, 0.9f);
+    glVertex2i(x + 240, y + 120 + speedY);
+    glVertex2i(x + 280, y + 120 + speedY);
+    glVertex2i(x + 280, y + 100 + speedY);
+    glVertex2i(x + 240, y + 100 + speedY);
+    glEnd();
+
+    glBegin(GL_POLYGON);
+    glColor3f(0.0f, 0.0f, 0.9f);
+    glVertex2i(x + 270, y + 100 + speedY);
+    glVertex2i(x + 295, y + 100 + speedY);
+    glVertex2i(x + 295, y + speedY);
+    glVertex2i(x + 270, y + speedY);
+    glEnd();
+
+    int n_sec = 120;
+    //Second n
+    glBegin(GL_POLYGON);
+    glColor3f(0.0f, 0.0f, 0.9f);
+    glVertex2i(x + 220 + n_sec, y + 120 + speedY);
+    glVertex2i(x + 240 + n_sec, y + 120 + speedY);
+    glVertex2i(x + 240 + n_sec, y + speedY);
+    glVertex2i(x + 220 + n_sec, y + speedY);
+    glEnd();
+
+    glBegin(GL_POLYGON);
+    glColor3f(0.0f, 0.0f, 0.9f);
+    glVertex2i(x + 240 + n_sec, y + 120 + speedY);
+    glVertex2i(x + 280 + n_sec, y + 120 + speedY);
+    glVertex2i(x + 280 + n_sec, y + 100 + speedY);
+    glVertex2i(x + 240 + n_sec, y + 100 + speedY);
+    glEnd();
+
+    glBegin(GL_POLYGON);
+    glColor3f(0.0f, 0.0f, 0.9f);
+    glVertex2i(x + 270 + n_sec, y + 100 + speedY);
+    glVertex2i(x + 295 + n_sec, y + 100 + speedY);
+    glVertex2i(x + 295 + n_sec, y + speedY);
+    glVertex2i(x + 270 + n_sec, y + speedY);
+    glEnd();
+
+    //o
+    glBegin(GL_POLYGON);
+    glColor3f(0.0f, 0.0f, 0.9f);
+    glVertex2i(x + 455, y + 100 + speedY);
+    glVertex2i(x + 480, y + 100 + speedY);
+    glVertex2i(x + 480, y + 20 + speedY);
+    glVertex2i(x + 455, y + 20 + speedY);
+    glEnd();
+
+    glBegin(GL_POLYGON);
+    glColor3f(0.0f, 0.0f, 0.9f);
+    glVertex2i(x + 470, y + 120 + speedY);
+    glVertex2i(x + 480, y + 120 + speedY);
+    glVertex2i(x + 480, y + speedY);
+    glVertex2i(x + 470, y + speedY);
+    glEnd();
+
+    glBegin(GL_POLYGON);
+    glColor3f(0.0f, 0.0f, 0.9f);
+    glVertex2i(x + 470, y + 120 + speedY);
+    glVertex2i(x + 540, y + 120 + speedY);
+    glVertex2i(x + 540, y + 100 + speedY);
+    glVertex2i(x + 470, y + 100 + speedY);
+    glEnd();
+
+    glBegin(GL_POLYGON);
+    glColor3f(0.0f, 0.0f, 0.9f);
+    glVertex2i(x + 470, y + 20 + speedY);
+    glVertex2i(x + 540, y + 20 + speedY);
+    glVertex2i(x + 540, y + speedY);
+    glVertex2i(x + 470, y + speedY);
+    glEnd();
+
+    glBegin(GL_POLYGON);
+    glColor3f(0.0f, 0.0f, 0.9f);
+    glVertex2i(x + 530, y + 100 + speedY);
+    glVertex2i(x + 555, y + 100 + speedY);
+    glVertex2i(x + 555, y + 20 + speedY);
+    glVertex2i(x + 530, y + 20 + speedY);
+    glEnd();
+
+    int c_sec = 140;
+    //c
+    glBegin(GL_POLYGON);
+    glColor3f(0.0f, 0.0f, 0.9f);
+    glVertex2i(x + 455 + c_sec, y + 100 + speedY);
+    glVertex2i(x + 480 + c_sec, y + 100 + speedY);
+    glVertex2i(x + 480 + c_sec, y + 20 + speedY);
+    glVertex2i(x + 455 + c_sec, y + 20 + speedY);
+    glEnd();
+
+    glBegin(GL_POLYGON);
+    glColor3f(0.0f, 0.0f, 0.9f);
+    glVertex2i(x + 470 + c_sec, y + 120 + speedY);
+    glVertex2i(x + 480 + c_sec, y + 120 + speedY);
+    glVertex2i(x + 480 + c_sec, y + speedY);
+    glVertex2i(x + 470 + c_sec, y + speedY);
+    glEnd();
+
+    glBegin(GL_POLYGON);
+    glColor3f(0.0f, 0.0f, 0.9f);
+    glVertex2i(x + 470 + c_sec, y + 120 + speedY);
+    glVertex2i(x + 540 + c_sec, y + 120 + speedY);
+    glVertex2i(x + 540 + c_sec, y + 100 + speedY);
+    glVertex2i(x + 470 + c_sec, y + 100 + speedY);
+    glEnd();
+
+    glBegin(GL_POLYGON);
+    glColor3f(0.0f, 0.0f, 0.9f);
+    glVertex2i(x + 470 + c_sec, y + 20 + speedY);
+    glVertex2i(x + 540 + c_sec, y + 20 + speedY);
+    glVertex2i(x + 540 + c_sec, y + speedY);
+    glVertex2i(x + 470 + c_sec, y + speedY);
+    glEnd();
+
+    glBegin(GL_POLYGON);
+    glColor3f(0.0f, 0.0f, 0.9f);
+    glVertex2i(x + 520 + c_sec, y + 40 + speedY);
+    glVertex2i(x + 560 + c_sec, y + 40 + speedY);
+    glVertex2i(x + 560 + c_sec, y + 20 + speedY);
+    glVertex2i(x + 520 + c_sec, y + 20 + speedY);
+    glEnd();
+
+    glBegin(GL_POLYGON);
+    glColor3f(0.0f, 0.0f, 0.9f);
+    glVertex2i(x + 520 + c_sec, y + 100 + speedY);
+    glVertex2i(x + 560 + c_sec, y + 100 + speedY);
+    glVertex2i(x + 560 + c_sec, y + 80+ speedY);
+    glVertex2i(x + 520 + c_sec, y + 80+ speedY);
+    glEnd();
+
+    //h
+    int h_sec = 760;
+    glBegin(GL_POLYGON);
+    glColor3f(0.0f, 0.0f, 0.9f);
+    glVertex2i(x + h_sec, y + 200+ speedY);
+    glVertex2i(x + 20 + h_sec, y + 200+ speedY);
+    glVertex2i(x + 20 + h_sec, y+ speedY);
+    glVertex2i(x + h_sec, y+ speedY);
+    glEnd();
+
+    glBegin(GL_POLYGON);
+    glColor3f(0.0f, 0.0f, 0.9f);
+    glVertex2i(x - 20 + h_sec, y + 20 + speedY);
+    glVertex2i(x + 20 + h_sec, y + 20 + speedY);
+    glVertex2i(x + 20 + h_sec, y + speedY);
+    glVertex2i(x - 20 + h_sec, y + speedY);
+    glEnd();
+
+    glBegin(GL_POLYGON);
+    glColor3f(0.0f, 0.0f, 0.9f);
+    glVertex2i(x - 20 + h_sec, y + 200 + speedY);
+    glVertex2i(x + 20 + h_sec, y + 200 + speedY);
+    glVertex2i(x + 20 + h_sec, y + 180 + speedY);
+    glVertex2i(x - 20 + h_sec, y + 180 + speedY);
+    glEnd();
+
+    glBegin(GL_POLYGON);
+    glColor3f(0.0f, 0.0f, 0.9f);
+    glVertex2i(x + 20 + h_sec, y + 100 + speedY);
+    glVertex2i(x + 40 + h_sec, y + 100 + speedY);
+    glVertex2i(x + 40 + h_sec, y + 80 + speedY);
+    glVertex2i(x + 20 + h_sec, y + 80 + speedY);
+    glEnd();
+
+    glBegin(GL_POLYGON);
+    glColor3f(0.0f, 0.0f, 0.9f);
+    glVertex2i(x + 40 + h_sec, y + 120 + speedY);
+    glVertex2i(x + 80 + h_sec, y + 120 + speedY);
+    glVertex2i(x + 80 + h_sec, y + 100 + speedY);
+    glVertex2i(x + 40 + h_sec, y + 100 + speedY);
+    glEnd();
+
+    glBegin(GL_POLYGON);
+    glColor3f(0.0f, 0.0f, 0.9f);
+    glVertex2i(x + 70 + h_sec, y + 100 + speedY);
+    glVertex2i(x + 95 + h_sec, y + 100 + speedY);
+    glVertex2i(x + 95 + h_sec, y + speedY);
+    glVertex2i(x + 70 + h_sec, y + speedY);
+    glEnd();
+
+    //second i
+    int i_sec = 780;
+    glBegin(GL_POLYGON);
+    glColor3f(0.0f, 0.0f, 0.9f);
+    glVertex2i(x + 140 + i_sec, y + 120 + speedY);
+    glVertex2i(x + 160 + i_sec, y + 120 + speedY);
+    glVertex2i(x + 160 + i_sec, y + speedY);
+    glVertex2i(x + 140 + i_sec, y + speedY);
+    glEnd();
+
+    glBegin(GL_POLYGON);
+    glColor3f(0.0f, 0.0f, 0.9f);
+    glVertex2i(x + 120 + i_sec, y + 20 + speedY);
+    glVertex2i(x + 180 + i_sec, y + 20 + speedY);
+    glVertex2i(x + 180 + i_sec, y + speedY);
+    glVertex2i(x + 120 + i_sec, y + speedY);
+    glEnd();
+
+    glBegin(GL_POLYGON);
+    glColor3f(0.0f, 0.0f, 0.9f);
+    glVertex2i(x + 120 + i_sec, y + 120 + speedY);
+    glVertex2i(x + 160 + i_sec, y + 120 + speedY);
+    glVertex2i(x + 160 + i_sec, y + 100 + speedY);
+    glVertex2i(x + 120 + i_sec, y + 100 + speedY);
+    glEnd();
+
+    glBegin(GL_POLYGON);
+    glColor3f(0.0f, 0.0f, 0.9f);
+    glVertex2i(x + 140 + i_sec, y + 180 + speedY);
+    glVertex2i(x + 160 + i_sec, y + 180 + speedY);
+    glVertex2i(x + 160 + i_sec, y + 160 + speedY);
+    glVertex2i(x + 140 + i_sec, y + 160 + speedY);
+    glEnd();
+
+    //second o
+    int o_sec = 540;
+    glBegin(GL_POLYGON);
+    glColor3f(0.0f, 0.0f, 0.9f);
+    glVertex2i(x + 455 + o_sec, y + 100 + speedY);
+    glVertex2i(x + 480 + o_sec, y + 100 + speedY);
+    glVertex2i(x + 480 + o_sec, y + 20 + speedY);
+    glVertex2i(x + 455 + o_sec, y + 20 + speedY);
+    glEnd();
+
+    glBegin(GL_POLYGON);
+    glColor3f(0.0f, 0.0f, 0.9f);
+    glVertex2i(x + 470 + o_sec, y + 120 + speedY);
+    glVertex2i(x + 480 + o_sec, y + 120 + speedY);
+    glVertex2i(x + 480 + o_sec, y + speedY);
+    glVertex2i(x + 470 + o_sec, y + speedY);
+    glEnd();
+
+    glBegin(GL_POLYGON);
+    glColor3f(0.0f, 0.0f, 0.9f);
+    glVertex2i(x + 470 + o_sec, y + 120 + speedY);
+    glVertex2i(x + 540 + o_sec, y + 120 + speedY);
+    glVertex2i(x + 540 + o_sec, y + 100 + speedY);
+    glVertex2i(x + 470 + o_sec, y + 100 + speedY);
+    glEnd();
+
+    glBegin(GL_POLYGON);
+    glColor3f(0.0f, 0.0f, 0.9f);
+    glVertex2i(x + 470 + o_sec, y + 20 + speedY);
+    glVertex2i(x + 540 + o_sec, y + 20 + speedY);
+    glVertex2i(x + 540 + o_sec, y + speedY);
+    glVertex2i(x + 470 + o_sec, y + speedY);
+    glEnd();
+
+    glBegin(GL_POLYGON);
+    glColor3f(0.0f, 0.0f, 0.9f);
+    glVertex2i(x + 530 + o_sec, y + 100 + speedY);
+    glVertex2i(x + 555 + o_sec, y + 100 + speedY);
+    glVertex2i(x + 555 + o_sec, y + 20 + speedY);
+    glVertex2i(x + 530 + o_sec, y + 20 + speedY);
+    glEnd();
 }
 
 void idle()
@@ -247,24 +589,40 @@ void idle()
     static int totalX = 0.0;
     static int totalY = 0.0;
     static int noseX = 0.0;
+    static int noseY = 0.0;
+    static int wordY = 0.0;
     DWORD start = GetTickCount64();
     while (GetTickCount64() - start < 1000 / FPS);
 
-    if (totalX < 800)
+    if (totalX < 1000)
     {
         walkingX -= dx;
         totalX += dx;
     }
     else if (totalX > 0)
     {
-        walkingX += 30;
-        nose_move -= dx *3;
-        noseX += dx *3;
+        walkingX += 50;
+        nose_move -= dx * 4;
+        noseX += dx * 4;
     }
-    
+    if (noseX > 1200)
+    {
+        nose_enlarge -= dy * 0.2;
+        noseY += dy * 0.2;
+
+    }
+    if (wordY < 450 && noseX > 1000)
+    {
+        word_enlarge -= dy * 0.5;
+        wordY += dy * 0.5;
+    }
+    else if (wordY > 0)
+    {
+
+        word_enlarge -= 0;
+    }
 
 }
-
 
 void display() 
 {
@@ -272,7 +630,8 @@ void display()
     /* Clear the screen */
     glClear(GL_COLOR_BUFFER_BIT);
 
-    drawPinnochio(800, 250, 100.0f, 50.0f, walkingX, walkingY, scaleFactor, nose_move);
+    drawPinnochio(800, 295, 100.0f, 50.0f, walkingX, walkingY, scaleFactor, nose_move, nose_enlarge);
+    fontPinnochio(260, 800, 0, word_enlarge, 0);
 
     glFlush();
 
